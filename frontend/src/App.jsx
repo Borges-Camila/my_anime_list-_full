@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import MainContent from "./pages/MainContent";
@@ -56,7 +56,7 @@ function App() {
   }, [search]);
 
   return (
-    <Router>
+    <>
       <Header search={search} setSearch={setSearch} />
       <Routes>
         <Route
@@ -91,7 +91,7 @@ function App() {
         <Route path={routesIndex.about} element={<About />} />
         <Route path={routesIndex.error404} element={<NotFound />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
