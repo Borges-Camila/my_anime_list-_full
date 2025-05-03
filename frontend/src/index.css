@@ -1,0 +1,11 @@
+@import url(./vendor/fonts/fonts.css);
+@import url(./styles/Page.css);
+@import url(./styles/Header.css);
+@import url(./styles/MainContent.css);
+@import url(./styles/AnimeListCard.css);
+@import url(./styles/AnimeInfoSideBar.css);
+@import url(./styles/AddToMyList.css);
+@import url(./styles/NotFound.css);
+@import url(./styles/About.css);
+@import url(./styles/Forms.css);
+@import url(./styles/Profile.css);

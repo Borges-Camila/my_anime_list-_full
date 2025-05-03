@@ -1,0 +1,20 @@
+.list-button {
+  background-color: rgb(82, 92, 70);
+  color: #f9f6ef;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(19, 50, 43, 0.3);
+  margin: 1.2rem;
+  width: auto;
+}
+
+.list-button:hover {
+  background-color: #2f3624;
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 8px rgba(19, 50, 43, 0.4);
+}
