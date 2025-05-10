@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import MainContent from "./pages/MainContent";
-import NotFound from "./pages/notFound";
+import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -19,11 +19,14 @@ function App() {
   const [myAnimeList, setMyAnimeList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const NOT_FOUND_INDEX = -1;
+  const DEBOUNCE_DELAY = 500; // ms
+
   const addToList = (anime) => {
     const index = myAnimeList.findIndex(
       (myanime) => myanime.mal_id === anime.mal_id
     );
-    if (index < 0) {
+    if (index === NOT_FOUND_INDEX) {
       setMyAnimeList([...myAnimeList, anime]);
     }
   };
@@ -50,7 +53,7 @@ function App() {
 
     const timer = setTimeout(() => {
       loadData();
-    }, 500); // Debounce básico
+    }, DEBOUNCE_DELAY); // Debounce básico
 
     return () => clearTimeout(timer);
   }, [search]);
