@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -7,7 +8,18 @@ function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Lógica de autenticação aqui
+    if (!email || !password) {
+      toast.error("Preencha todos os campos");
+      return;
+    }
+    try {
+      // lógica de autenticação
+      toast.success("Login realizado com sucesso!");
+      // Redirecionamento
+    } catch (error) {
+      toast.error("Email ou senha incorretos");
+      console.error(error);
+    }
   };
 
   return (

@@ -1,14 +1,37 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica de cadastro aqui
+
+    if (!name || !email || !password) {
+      toast.error("Preencha todos os campos");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.warning("A senha deve ter pelo menos 6 caracteres");
+      return;
+    }
+
+    try {
+      // lógica de cadastro
+      toast.success("Cadastro realizado com sucesso!");
+      // Redirecionamento
+    } catch (error) {
+      if (error.message.includes("email")) {
+        toast.error("Este email já está cadastrado");
+      } else {
+        toast.error("Erro ao cadastrar. Tente novamente.");
+      }
+      console.error(error);
+    }
   };
 
   return (

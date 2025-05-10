@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+// biblioteca com o toast
+import { Toaster, toast } from "sonner";
 
 import Header from "./components/Header";
 import MainContent from "./pages/MainContent";
@@ -9,6 +11,11 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import { routesIndex } from "./routes";
+import {
+  NOT_FOUND_INDEX,
+  EMPTY_RESULTS,
+  DEBOUNCE_DELAY,
+} from "./constants/constants";
 
 import { fetchAnimeData } from "./utils/animeApi";
 
@@ -19,15 +26,15 @@ function App() {
   const [myAnimeList, setMyAnimeList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const NOT_FOUND_INDEX = -1;
-  const DEBOUNCE_DELAY = 500; // ms
-
   const addToList = (anime) => {
     const index = myAnimeList.findIndex(
       (myanime) => myanime.mal_id === anime.mal_id
     );
     if (index === NOT_FOUND_INDEX) {
       setMyAnimeList([...myAnimeList, anime]);
+      toast.success(`${anime.title} adicionado à sua lista!`);
+    } else {
+      toast.info(`${anime.title} já está na sua lista.`);
     }
   };
 
@@ -35,6 +42,7 @@ function App() {
     setMyAnimeList(
       myAnimeList.filter((myanime) => myanime.mal_id !== anime.mal_id)
     );
+    toast.success(`${anime.title} removido da sua lista.`);
   };
 
   useEffect(() => {
@@ -43,9 +51,13 @@ function App() {
       try {
         const data = await fetchAnimeData(search);
         setAnimeData(data); // Pode ser null (nenhum resultado) ou array de animes
+        if (!data || data.length === EMPTY_RESULTS) {
+          toast.warning(`Nenhum resultado encontrado para "${search}"`);
+        }
       } catch (error) {
         console.error("Erro na API:", error);
         setAnimeData(null); // Força mostrar a tela de "não encontrado"
+        toast.error("Falha ao buscar animes. Tente novamente mais tarde.");
       } finally {
         setIsLoading(false);
       }
@@ -94,6 +106,7 @@ function App() {
         <Route path={routesIndex.about} element={<About />} />
         <Route path={routesIndex.error404} element={<NotFound />} />
       </Routes>
+      <Toaster position="bottom-right" expand={false} richColors />
     </>
   );
 }

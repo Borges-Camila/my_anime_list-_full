@@ -1,6 +1,8 @@
 import { useState } from "react";
 import AnimeListCard from "../components/AnimeListCard";
 import RemoveFromMyList from "../components/RemoveFromMyList";
+import { toast } from "sonner";
+import { EMPTY_RESULTS } from "../constants/constants";
 
 function Profile({ myAnimeList, removeFromList, setAnimeInfo }) {
   const [name, setName] = useState("Usuário");
@@ -12,11 +14,17 @@ function Profile({ myAnimeList, removeFromList, setAnimeInfo }) {
   const handleSaveChanges = (e) => {
     e.preventDefault();
     // Atualiza a URL da imagem apenas se foi fornecida uma nova
-    if (tempImageUrl) {
-      setProfileImageUrl(tempImageUrl);
-      setTempImageUrl("");
+    try {
+      if (tempImageUrl) {
+        setProfileImageUrl(tempImageUrl);
+        setTempImageUrl("");
+      }
+      setShowEditModal(false);
+      toast.success("Perfil atualizado com sucesso!");
+    } catch (error) {
+      toast.error("Erro ao salvar alterações");
+      console.error(error);
     }
-    setShowEditModal(false);
   };
 
   return (
@@ -56,7 +64,7 @@ function Profile({ myAnimeList, removeFromList, setAnimeInfo }) {
       <div className="profile-anime-list">
         <h2 className="section-title">Minha Lista de Animes</h2>
 
-        {myAnimeList.length > 0 ? (
+        {myAnimeList.length === EMPTY_RESULTS ? (
           <div className="anime-grid">
             <AnimeListCard
               animeList={myAnimeList}
