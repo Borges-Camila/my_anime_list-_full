@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import UserModel from '../models/users.js';
 import CustomError from '../utils/CustomError.js';
 
-// const { JWT_SECRET } = process.env;
-
 // função para o hash
 function createHash(password) {
   const salt = bcrypt.genSaltSync(10);
@@ -72,7 +70,7 @@ async function updateUserInfo(_id, body = {}) {
         new: true,
         runValidators: true,
       },
-    ).exec(); // Adicione .exec() para garantir a execução
+    ).exec();
 
     if (!updatedUser) {
       throw new CustomError(
@@ -118,7 +116,6 @@ async function login(items) {
       );
     }
 
-    // Verifique se JWT_SECRET está definido
     if (!process.env.JWT_SECRET) {
       throw new Error('Chave JWT não configurada');
     }

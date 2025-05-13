@@ -1,4 +1,4 @@
-import CardModel from '../models/card.js';
+import CardModel from '../models/cards.js';
 
 // busca os cartões
 async function listCards() {

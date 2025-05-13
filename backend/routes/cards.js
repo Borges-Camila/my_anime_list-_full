@@ -49,7 +49,6 @@ router.post(
     try {
       const { title, titleJapanese, images, synopsis } =
         request.body;
-      // Obtendo ID do usuário da requisição
       const userId = request.user?._id;
 
       if (!userId) {

@@ -64,7 +64,7 @@ userSchema.statics.findUserByCredentials =
       throw new Error('Senha incorreta');
     }
 
-    return user; // Retorna o usuário completo
+    return user;
   };
 
 const UserModel = mongoose.model('users', userSchema);

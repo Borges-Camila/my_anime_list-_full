@@ -3,7 +3,6 @@ import CustomError from '../utils/CustomError.js';
 
 const auth = async (req, res, next) => {
   try {
-    // 1. Extrair o token do header
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -16,13 +15,11 @@ const auth = async (req, res, next) => {
 
     const token = authHeader.split(' ')[1];
 
-    // 2. Verificar o token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // 3. Adicionar o usuário à requisição
     req.user = {
-      id: decoded.id, // Mantenha compatibilidade
-      _id: decoded.id, // Padrão MongoDB
+      id: decoded.id,
+      _id: decoded.id,
     };
 
     next();
@@ -44,31 +41,3 @@ const auth = async (req, res, next) => {
 };
 
 export default auth;
-
-// const { JWT_SECRET } = process.env;
-
-// const auth = (req, res, next) => {
-//   const { authorization } = req.headers;
-//   if (!authorization || !authorization.startsWith('Bearer ')) {
-//     return res
-//       .status(401)
-//       .send({ message: 'Autorização necessária' });
-//   }
-
-//   const token = authorization.replace('Bearer ', '');
-//   let payload;
-
-//   try {
-//     payload = jwt.verify(token, JWT_SECRET);
-//   } catch (err) {
-//     return res
-//       .status(401)
-//       .send({ message: 'Autorização necessária' });
-//   }
-
-//   req.user = payload;
-
-//   next();
-// };
-
-// export default auth;
