@@ -1,0 +1,91 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "sonner";
+
+function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !email || !password) {
+      toast.error("Preencha todos os campos");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.warning("A senha deve ter pelo menos 6 caracteres");
+      return;
+    }
+
+    try {
+      // lógica de cadastro
+      toast.success("Cadastro realizado com sucesso!");
+      // Redirecionamento
+    } catch (error) {
+      if (error.message.includes("email")) {
+        toast.error("Este email já está cadastrado");
+      } else {
+        toast.error("Erro ao cadastrar. Tente novamente.");
+      }
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="auth">
+      <div className="auth-card">
+        <h2 className="auth-card__title">Crie sua conta</h2>
+
+        <form onSubmit={handleSubmit} className="auth-card__form">
+          <div className="auth-card__form-group">
+            <label htmlFor="name">Nome</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="auth-card__form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="auth-card__form-group">
+            <label htmlFor="password">Senha</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className="auth-card__button">
+            Cadastrar
+          </button>
+        </form>
+
+        <div className="auth-card__footer">
+          <p>
+            Já tem uma conta? <Link to="/signin">Faça login</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SignUp;

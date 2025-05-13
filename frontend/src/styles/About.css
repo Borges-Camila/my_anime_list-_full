@@ -1,0 +1,124 @@
+.about {
+  background-color: #f2f4e5;
+  margin-top: 80px;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.about-content__title {
+  color: #00291c;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+}
+
+.about-section__subtitle {
+  color: #13322b;
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  border-bottom: 2px solid #d8dcc2;
+  padding-bottom: 0.5rem;
+}
+
+.about-section__text {
+  color: #525c46;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.about-features__card {
+  background-color: #d8dcc2;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.about-features__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 41, 28, 0.1);
+}
+
+.about-features__icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-features__card h3 {
+  color: #00291c;
+  margin-bottom: 0.8rem;
+}
+
+.about-features__card p {
+  color: #525c46;
+  font-size: 0.95rem;
+}
+
+.about-section__steps {
+  color: #525c46;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-section__steps li {
+  margin-bottom: 0.8rem;
+}
+
+.about-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.about-button {
+  display: block;
+  width: fit-content;
+  margin: 3rem auto 0;
+  background-color: #667257;
+  color: #f2f4e5;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.about-button:hover {
+  background-color: #525c46;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 41, 28, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .about-content__title {
+    font-size: 2rem;
+  }
+
+  .about-section__subtitle {
+    font-size: 1.5rem;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+}
